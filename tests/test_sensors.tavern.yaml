@@ -1,0 +1,111 @@
+test_name: SenseHAT Sensors
+
+stages:
+  - name: Humidity
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/sensors/humidity
+      method: GET
+    response:
+      status_code: 200
+      body:
+        unit: percentage
+        value: !anyfloat
+
+  - name: Temperature
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/sensors/temperature
+      method: GET
+    response:
+      status_code: 200
+      body:
+        from_humidity:
+          unit: celsius
+          value: !anyfloat
+        from_pressure:
+          unit: celsius
+          value: !anyfloat
+
+  - name: Pressure
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/sensors/pressure
+      method: GET
+    response:
+      status_code: 200
+      body:
+        unit: millibars
+        value: !anyfloat
+
+  - name: Orientation
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/sensors/orientation
+      method: GET
+    response:
+      status_code: 200
+      body:
+        - unit: radians
+          value:
+            pitch: !anyfloat
+            roll: !anyfloat
+            yaw: !anyfloat
+        - unit: degrees
+          value:
+            pitch: !anyfloat
+            roll: !anyfloat
+            yaw: !anyfloat
+
+  - name: Compass
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/sensors/compass
+      method: GET
+    response:
+      status_code: 200
+      body:
+        magnetic_intensity:
+          unit: microteslas
+          value:
+            x: !anyfloat
+            y: !anyfloat
+            z: !anyfloat
+        north_direction:
+          unit: degrees
+          value: !anyfloat
+
+  - name: Gyroscope
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/sensors/gyroscope
+      method: GET
+    response:
+      status_code: 200
+      body:
+        axis_angle:
+          unit: degrees
+          value:
+            pitch: !anyfloat
+            roll: !anyfloat
+            yaw: !anyfloat
+        axis_rotational_intensity:
+          unit: radians/second
+          value:
+            x: !anyfloat
+            y: !anyfloat
+            z: !anyfloat
+
+  - name: Accelerometer
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/sensors/accelerometer
+      method: GET
+    response:
+      status_code: 200
+      body:
+        axis_acceleration_intensity:
+          unit: G
+          value:
+            x: !anyfloat
+            y: !anyfloat
+            z: !anyfloat
+        axis_angle:
+          unit: degrees
+          value:
+            pitch: !anyfloat
+            roll: !anyfloat
+            yaw: !anyfloat
