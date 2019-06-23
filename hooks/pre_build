@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "[***] Registering qemu for all processors, except current one"
+docker run --rm --privileged multiarch/qemu-user-static:register --reset

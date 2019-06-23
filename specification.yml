@@ -1,0 +1,283 @@
+openapi: 3.0.1
+info:
+  title: Sense HAT REST API
+  description: RESTful app that exposes Sense HAT
+  version: 1.0.0
+  contact:
+    name: Gabriel Tanase
+    email: tanase.gabriel91@gmail.com
+
+servers:
+- url: /senseapi/v1
+
+paths:
+  /sensors/{name}:
+    get:
+      operationId: resolver.sensors.get
+      tags:
+      - Sensors
+      summary: Individual sensor values
+      parameters:
+      - name: name
+        in: path
+        description: Name of the sensor
+        required: true
+        schema:
+          $ref: '#/components/schemas/sensor'
+      responses:
+        200:
+          description: OK
+        400:
+          description: Bad Request
+
+  /led/settings:
+    get:
+      operationId: resolver.led.get_settings
+      tags:
+      - LED Matrix
+      summary: Get the customizable settings
+      responses:
+        200:
+          description: OK
+    post:
+      operationId: resolver.led.update_settings
+      tags:
+      - LED Matrix
+      summary: Update settings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/settings'
+        required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Bad Request
+
+  /led/pixel:
+    get:
+      operationId: resolver.led.get_pixel
+      tags:
+      - LED Matrix
+      summary: Get the colour of a specific pixel
+      parameters:
+      - name: x
+        in: query
+        description: Position of the pixel on the X xis
+        required: true
+        schema:
+          $ref: '#/components/schemas/pixel_position'
+      - name: y
+        in: query
+        description: Position of the pixel on the Y xis
+        required: true
+        schema:
+          $ref: '#/components/schemas/pixel_position'
+      responses:
+        200:
+          description: OK
+        400:
+          description: Bad Request
+    post:
+      operationId: resolver.led.update_pixel
+      tags:
+      - LED Matrix
+      summary: Update the colour of a specific pixel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pixel'
+        required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Bad Request
+
+  /led/pixels:
+    get:
+      operationId: resolver.led.get_pixels
+      tags:
+      - LED Matrix
+      summary: Get the colour of all pixels
+      responses:
+        200:
+          description: OK
+    post:
+      operationId: resolver.led.update_pixels
+      tags:
+      - LED Matrix
+      summary: Update the colour of all pixels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pixels'
+      responses:
+        200:
+          description: OK
+
+  /led/clear:
+    post:
+      operationId: resolver.led.clear
+      tags:
+      - LED Matrix
+      summary: Clear the pixels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/rgb_colour'
+        required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Bad Request
+
+  /led/flip:
+    post:
+      operationId: resolver.led.flip
+      tags:
+      - LED Matrix
+      summary: Flip the pixels horizontally or vertically
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/flip'
+        required: true
+      responses:
+        200:
+          description: OK
+
+  /led/show_letter:
+    post:
+      operationId: resolver.led.show_letter
+      tags:
+      - LED Matrix
+      summary: Display one letter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/show_letter'
+        required: true
+      responses:
+        200:
+          description: OK
+
+  /led/show_message:
+    post:
+      operationId: resolver.led.show_message
+      tags:
+      - LED Matrix
+      summary: Scroll a text message
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/show_message'
+        required: true
+      responses:
+        200:
+          description: OK
+
+
+components:
+  schemas:
+    sensor:
+      type: string
+      enum: ["humidity", "temperature", "pressure", "orientation", "compass", "gyroscope", "accelerometer"]
+    settings:
+      type: object
+      maxProperties: 2
+      properties:
+        low_light:
+          type: boolean
+        rotation:
+          type: integer
+          minimum: 0
+          maximum: 270
+          multipleOf: 90
+
+    pixel:
+      type: object
+      maxProperties: 3
+      properties:
+        x:
+          $ref: '#/components/schemas/pixel_position'
+        y:
+          $ref: '#/components/schemas/pixel_position'
+        colour:
+          $ref: '#/components/schemas/rgb_colour'
+      required:
+        - x
+        - y
+        - colour
+
+    pixels:
+      type: array
+      minItems: 64
+      maxItems: 64
+      items:
+        $ref: '#/components/schemas/rgb_colour'
+
+    flip:
+      type: object
+      maxProperties: 2
+      properties:
+        axis:
+          type: string
+          enum: ["horizontal", "vertical"]
+        redraw:
+          type: boolean
+      required:
+        - axis
+
+    show_letter:
+      type: object
+      maxProperties: 3
+      properties:
+        letter:
+          type: string
+          minLength: 1
+          maxLength: 1
+        text_colour:
+          $ref: '#/components/schemas/rgb_colour'
+        back_colour:
+          $ref: '#/components/schemas/rgb_colour'
+      required:
+        - letter
+
+    show_message:
+      type: object
+      maxProperties: 4
+      properties:
+        message:
+          type: string
+        scroll_speed:
+          type: number
+        text_colour:
+          $ref: '#/components/schemas/rgb_colour'
+        back_colour:
+          $ref: '#/components/schemas/rgb_colour'
+      required:
+        - message
+
+    pixel_position:
+      type: integer
+      minimum: 0
+      maximum: 7
+
+    rgb_colour:
+      type: array
+      minItems: 3
+      maxItems: 3
+      items:
+        type: integer
+        minimum: 0
+        maximum: 255
