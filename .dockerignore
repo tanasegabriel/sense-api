@@ -3,3 +3,4 @@
 **/*hooks
 **/*Dockerfile
 **/*.dockerignore
+**/*docker-compose.test.yml

@@ -1,0 +1,9 @@
+test_name: Sense HAT REST API
+
+stages:
+  - name: Homepage
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/ui/
+      method: GET
+    response:
+      status_code: 200
