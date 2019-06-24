@@ -1,0 +1,505 @@
+test_name: POST /led/clear
+stages:
+  - name: Expected payload
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/clear
+      method: POST
+      json:
+        - 0
+        - 0
+        - 0
+    response:
+      status_code: 200
+
+  - name: Pixel out of RGB range
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/clear
+      method: POST
+      json:
+        - 256
+        - 256
+        - 256
+    response:
+      status_code: 400
+
+  - name: Non RGB colour
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/clear
+      method: POST
+      json:
+        - 0
+    response:
+      status_code: 400
+
+  - name: No Payload
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/clear
+      method: POST
+    response:
+      status_code: 400
+
+
+test_name: POST /led/flip
+stages:
+  - name: Expected payload with redraw param
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/flip
+      method: POST
+      json:
+        axis: horizontal
+        redraw: True
+    response:
+      status_code: 200
+
+  - name: Expected payload without redraw param
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/flip
+      method: POST
+      json:
+        axis: vertical
+    response:
+      status_code: 200
+
+  - name: Incorrect axis param
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/flip
+      method: POST
+      json:
+        axis: sideways
+    response:
+      status_code: 400
+
+  - name: No Payload
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/flip
+      method: POST
+    response:
+      status_code: 400
+
+
+test_name: GET /led/pixel
+stages:
+  - name: Correct pixel position parameters
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/pixel?x=0&y=0
+      method: GET
+    response:
+      status_code: 200
+      body:
+        - 0
+        - 0
+        - 0
+
+  - name: Pixel position parameters out of range
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/pixel?x=8&y=8
+      method: GET
+    response:
+      status_code: 400
+
+  - name: No position parameters
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/pixel
+      method: GET
+    response:
+      status_code: 400
+
+
+test_name: POST /led/pixel
+stages:
+  - name: Expected payload
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/pixel
+      method: POST
+      json:
+        colour:
+          - 0
+          - 0
+          - 0
+        x: 0
+        y: 0
+    response:
+      status_code: 200
+
+
+  - name: Pixel out of RGB range
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/pixel
+      method: POST
+      json:
+        colour:
+          - 256
+          - 256
+          - 256
+        x: 0
+        y: 0
+    response:
+      status_code: 400
+
+  - name: Non RGB colour
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/clear
+      method: POST
+      json:
+        colour:
+          - 0
+        x: 0
+        y: 0
+    response:
+      status_code: 400
+
+  - name: Pixel position parameters out of range
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/clear
+      method: POST
+      json:
+        colour:
+          - 0
+          - 0
+          - 0
+        x: 8
+        y: 8
+    response:
+      status_code: 400
+
+  - name: No pixel position parameters
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/clear
+      method: POST
+      json:
+        colour:
+          - 0
+          - 0
+          - 0
+    response:
+      status_code: 400
+
+  - name: No colour
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/clear
+      method: POST
+      json:
+        x: 0
+        y: 0
+    response:
+      status_code: 400
+
+  - name: No payload
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/clear
+      method: POST
+    response:
+      status_code: 400
+
+
+test_name: GET /led/pixels
+stages:
+  - name: Correct response
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/pixels
+      method: GET
+    response:
+      status_code: 200
+      body: [
+        [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0],
+        [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0],
+        [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0],
+        [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0],
+        [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0],
+        [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0],
+        [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0],
+        [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0],
+      ]
+
+
+test_name: POST /led/pixels
+stages:
+  - name: Correct payload
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/pixels
+      method: POST
+      json: [
+        [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0],
+        [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0],
+        [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0],
+        [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0],
+        [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0],
+        [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0],
+        [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0],
+        [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0],
+      ]
+    response:
+      status_code: 200
+
+  - name: Pixels out of RGB range
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/pixels
+      method: POST
+      json: [
+        [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256],
+        [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256],
+        [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256],
+        [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256],
+        [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256],
+        [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256],
+        [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256],
+        [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256], [256,256,256],
+      ]
+    response:
+      status_code: 400
+
+  - name: Colour array out of range
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/pixels
+      method: POST
+      json:
+        - 0
+        - 0
+        - 0
+    response:
+      status_code: 400
+
+  - name: No payload
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/pixels
+      method: POST
+    response:
+      status_code: 400
+
+
+test_name: GET /led/settings
+stages:
+  - name: Correct response
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/settings
+      method: GET
+    response:
+      status_code: 200
+      body:
+        low_light: False
+        rotation: 0
+
+
+test_name: POST /led/settings
+stages:
+  - name: Correct low_light payload
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/settings
+      method: POST
+      json:
+        low_light: True
+        rotation: 90
+    response:
+      status_code: 200
+
+  - name: Invalid rotation parameter
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/settings
+      method: POST
+      json:
+        rotation: 1
+    response:
+      status_code: 400
+
+
+test_name: POST /led/show_letter
+stages:
+  - name: Correct payload without colour params
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/show_letter
+      method: POST
+      json:
+        letter: A
+    response:
+      status_code: 200
+
+  - name: Correct payload with background colour param
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/show_letter
+      method: POST
+      json:
+        back_colour:
+          - 255
+          - 255
+          - 255
+        letter: A
+    response:
+      status_code: 200
+
+  - name: Correct payload with background and text colour params
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/show_letter
+      method: POST
+      json:
+        back_colour:
+          - 255
+          - 255
+          - 255
+        text_colour:
+          - 128
+          - 128
+          - 128
+        letter: A
+    response:
+      status_code: 200
+
+  - name: RGB colour out of range
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/show_letter
+      method: POST
+      json:
+        back_colour:
+          - 256
+          - 256
+          - 256
+        text_colour:
+          - 256
+          - 256
+          - 256
+        letter: A
+    response:
+      status_code: 400
+
+  - name: Non RGB colour
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/show_letter
+      method: POST
+      json:
+        back_colour:
+          - 0
+        text_colour:
+          - 0
+        letter: A
+    response:
+      status_code: 400
+
+  - name: Invalid letter param
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/show_letter
+      method: POST
+      json:
+        back_colour:
+          - 255
+          - 255
+          - 255
+        text_colour:
+          - 128
+          - 128
+          - 128
+        letter: ABC
+    response:
+      status_code: 400
+
+  - name: No payload
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/show_letter
+      method: POST
+    response:
+      status_code: 400
+
+
+test_name: POST /led/show_message
+stages:
+  - name: Correct payload without colour or speed params
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/show_message
+      method: POST
+      json:
+        message: TEST
+    response:
+      status_code: 200
+
+  - name: Correct payload with background colour param
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/show_message
+      method: POST
+      json:
+        back_colour:
+          - 255
+          - 255
+          - 255
+        message: TEST
+    response:
+      status_code: 200
+
+  - name: Correct payload with background and text colour params
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/show_message
+      method: POST
+      json:
+        back_colour:
+          - 255
+          - 255
+          - 255
+        text_colour:
+          - 128
+          - 128
+          - 128
+        message: TEST
+    response:
+      status_code: 200
+
+  - name: Correct payload with background, text colour and speed params
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/show_message
+      method: POST
+      json:
+        back_colour:
+          - 255
+          - 255
+          - 255
+        text_colour:
+          - 128
+          - 128
+          - 128
+        message: TEST 
+        scroll_speed: 0.05
+    response:
+      status_code: 200
+
+  - name: Incorrect speed param
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/show_message
+      method: POST
+      json:
+        message: TEST
+        scroll_speed: speed
+    response:
+      status_code: 400
+
+  - name: RGB colour out of range
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/show_message
+      method: POST
+      json:
+        back_colour:
+          - 256
+          - 256
+          - 256
+        text_colour:
+          - 256
+          - 256
+          - 256
+        message: TEST
+    response:
+      status_code: 400
+
+  - name: Non RGB colour
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/show_message
+      method: POST
+      json:
+        back_colour:
+          - 0
+        text_colour:
+          - 0
+        message: TEST
+    response:
+      status_code: 400
+
+  - name: No payload
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/led/show_message
+      method: POST
+    response:
+      status_code: 400
