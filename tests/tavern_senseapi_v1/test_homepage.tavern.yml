@@ -1,0 +1,18 @@
+test_name: OpenAPI Homepage
+
+stages:
+  - name: Redirect to OpenAPI UI
+    request:
+      url: http://127.0.0.1:8000
+      method: GET
+    response:
+      status_code: 302
+      headers:
+        Location: http://127.0.0.1:8000/senseapi/v1/ui/
+
+  - name: OpenAPI UI
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/ui/
+      method: GET
+    response:
+      status_code: 200
