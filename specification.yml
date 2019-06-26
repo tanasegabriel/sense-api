@@ -212,6 +212,16 @@ paths:
         200:
           description: OK
 
+  /joystick/events:
+    get:
+      operationId: resolver.joystick.get_events
+      tags:
+       - Joystick
+      summary: Get joystick events since last call (max 1000)
+      responses:
+        200:
+          description: OK
+
 
 components:
   schemas:

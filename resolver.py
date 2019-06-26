@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import sys
-from sense_wrappers import sensors, led_matrix
+from sense_wrappers import sensors, led_matrix, joystick
 
 if "emulation" in sys.argv:
   from sense_emu import SenseHat
@@ -10,3 +10,4 @@ else:
 sense = SenseHat()
 sensors = sensors.Sensors(sense)
 led = led_matrix.LedMatrix(sense)
+joystick = joystick.Joystick(sense)
