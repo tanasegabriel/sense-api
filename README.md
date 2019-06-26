@@ -17,5 +17,7 @@ docker run -d -p 8000:8000 --privileged --name sense-api --restart on-failure ta
 
 ## Usage
 Access `http://localhost:8000` in your browser:
+![homepage](https://i.imgur.com/0sLC54b.png)
+
 
 You can use the UI to understand how the API works and to test it out, but programatic requests should be issued on `http://localhost:8000/senseapi/v1/<endpoint>`.
