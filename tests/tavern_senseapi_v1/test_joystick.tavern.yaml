@@ -1,0 +1,10 @@
+test_name: SenseHAT Joystick
+
+stages:
+  - name: Humidity
+    request:
+      url: http://127.0.0.1:8000/senseapi/v1/joystick/events
+      method: GET
+    response:
+      status_code: 200
+      body: []
