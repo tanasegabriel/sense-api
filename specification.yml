@@ -49,6 +49,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/settings'
+            example:
+              low_light: true
+              rotation: 90
         required: true
       responses:
         200:
@@ -90,6 +93,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/pixel'
+            example:
+              x: 0
+              y: 0
+              colour: [255, 0, 0]
         required: true
       responses:
         200:
@@ -116,6 +123,16 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/pixels'
+            example: [
+              [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
+              [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
+              [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
+              [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
+              [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
+              [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
+              [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
+              [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
+            ]
       responses:
         200:
           description: OK
@@ -131,6 +148,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/rgb_colour'
+            example: [255, 255, 255]
         required: true
       responses:
         200:
@@ -165,6 +183,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/show_letter'
+            example:
+              letter: A
+              back_colour: [0, 255, 255]
+              text_colour: [255, 0, 0]
         required: true
       responses:
         200:
@@ -181,6 +203,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/show_message'
+            example:
+              message: "A small step for the Pi"
+              back_colour: [255, 0, 0]
+              text_colour: [0, 255, 255]
         required: true
       responses:
         200:
@@ -189,9 +215,11 @@ paths:
 
 components:
   schemas:
+
     sensor:
       type: string
       enum: ["humidity", "temperature", "pressure", "orientation", "compass", "gyroscope", "accelerometer"]
+
     settings:
       type: object
       maxProperties: 2
