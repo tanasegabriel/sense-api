@@ -1,4 +1,4 @@
-FROM balenalib/rpi-raspbian
+FROM balenalib/rpi-raspbian:stretch
 LABEL maintainer="Gabriel Tanase <tanase.gabriel91@gmail.com>"
 
 # Installing system dependencies
