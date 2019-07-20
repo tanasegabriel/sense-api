@@ -38,7 +38,6 @@ python-box==3.4.1
 python-dateutil==2.8.0
 PyYAML==5.1.1
 requests==2.22.0
-RTIMULib==7.2.1
 sense-emu==1.1
 sense-hat==2.2.0
 six==1.12.0
