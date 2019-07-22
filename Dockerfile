@@ -1,15 +1,14 @@
 FROM balenalib/rpi-raspbian as intermediate
 
 # Cloning the RTIMUlib repository
-RUN apt-get update -y && apt-get install -y git
-RUN git clone https://github.com/RPi-Distro/RTIMULib
+RUN install_packages git &&\
+    git clone https://github.com/RPi-Distro/RTIMULib
 
 FROM balenalib/rpi-raspbian
 LABEL maintainer="Gabriel Tanase <tanase.gabriel91@gmail.com>"
 
 # Installing system dependencies
-RUN apt-get update &&\
-    apt-get install -y --no-install-recommends\
+RUN install_packages\
     python3 python3-dev python3-virtualenv g++ gcc-arm-linux-gnueabihf libatlas-base-dev libopenjp2-7 libtiff5
 
 # Setting up the virtualenv
