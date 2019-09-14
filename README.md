@@ -1,5 +1,9 @@
-![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/tanasegabriel/sense-api.svg?style=popout)
-![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/tanasegabriel/sense-api.svg?style=popout)
+[![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/tanasegabriel/sense-api.svg?style=popout)](https://hub.docker.com/r/tanasegabriel/sense-api)
+[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/tanasegabriel/sense-api.svg?style=popout)](https://hub.docker.com/r/tanasegabriel/sense-api/builds)
+[![Docker Pulls](https://img.shields.io/docker/pulls/tanasegabriel/sense-api.svg?color=yellowgreen&style=popout)](https://hub.docker.com/r/tanasegabriel/sense-api)
+[![Docker Image Size](https://img.shields.io/microbadger/image-size/tanasegabriel/sense-api?color=blueviolet&style=popout)](https://hub.docker.com/r/tanasegabriel/sense-api/taggs)
+[![Hardware](https://img.shields.io/badge/hardware-Raspberry_Pi-orange?style=popout)](https://www.raspberrypi.org/)
+
 
 # SenseAPI
 A simple RESTful service built on top of the [SenseHAT Python API module](https://pythonhosted.org/sense-hat/), that runs on Docker.
