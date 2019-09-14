@@ -1,8 +1,19 @@
 FROM balenalib/rpi-raspbian
-LABEL maintainer="Gabriel Tanase <tanase.gabriel91@gmail.com>"
+
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION
+LABEL maintainer="Gabriel Tanase <tanase.gabriel91@gmail.com>" \
+      org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.name="SenseAPI" \
+      org.label-schema.description="A simple RESTful service built on top of the SenseHAT Python API module, that runs on Docker" \
+      org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.vcs-url="https://github.com/tanasegabriel/sense-api" \
+      org.label-schema.version=$VERSION \
+      org.label-schema.schema-version="1.0"
 
 # Installing system dependencies
-RUN install_packages\
+RUN install_packages \
     python3 python3-pip libatlas-base-dev libopenjp2-7 libtiff5
 
 # Setting up the app
