@@ -44,6 +44,8 @@ class Sensors(object):
     return getattr(self, name)()
 
   def __u_v_dict(self, u, v):
+    if isinstance(v, int):
+      v = float(v)
+    elif isinstance(v, dict):
+      v = { key:float(value) for key,value in v.items() }
     return {"unit": u, "value": v}
-
-
