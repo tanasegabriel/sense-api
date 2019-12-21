@@ -8,22 +8,22 @@ info:
     email: tanase.gabriel91@gmail.com
 
 servers:
-- url: /senseapi/v1
+  - url: /senseapi/v1
 
 paths:
   /sensors/{name}:
     get:
       operationId: resolver.sensors.get
       tags:
-      - Sensors
+        - Sensors
       summary: Individual sensor values
       parameters:
-      - name: name
-        in: path
-        description: Name of the sensor
-        required: true
-        schema:
-          $ref: '#/components/schemas/sensor'
+        - name: name
+          in: path
+          description: Name of the sensor
+          required: true
+          schema:
+            $ref: '#/components/schemas/sensor'
       responses:
         200:
           description: OK
@@ -34,7 +34,7 @@ paths:
     get:
       operationId: resolver.led.get_settings
       tags:
-      - LED Matrix
+        - LED Matrix
       summary: Get the customizable settings
       responses:
         200:
@@ -42,7 +42,7 @@ paths:
     post:
       operationId: resolver.led.update_settings
       tags:
-      - LED Matrix
+        - LED Matrix
       summary: Update settings
       requestBody:
         content:
@@ -63,21 +63,21 @@ paths:
     get:
       operationId: resolver.led.get_pixel
       tags:
-      - LED Matrix
+        - LED Matrix
       summary: Get the colour of a specific pixel
       parameters:
-      - name: x
-        in: query
-        description: Position of the pixel on the X xis
-        required: true
-        schema:
-          $ref: '#/components/schemas/pixel_position'
-      - name: y
-        in: query
-        description: Position of the pixel on the Y xis
-        required: true
-        schema:
-          $ref: '#/components/schemas/pixel_position'
+        - name: x
+          in: query
+          description: Position of the pixel on the X xis
+          required: true
+          schema:
+            $ref: '#/components/schemas/pixel_position'
+        - name: y
+          in: query
+          description: Position of the pixel on the Y xis
+          required: true
+          schema:
+            $ref: '#/components/schemas/pixel_position'
       responses:
         200:
           description: OK
@@ -86,7 +86,7 @@ paths:
     post:
       operationId: resolver.led.update_pixel
       tags:
-      - LED Matrix
+        - LED Matrix
       summary: Update the colour of a specific pixel
       requestBody:
         content:
@@ -108,7 +108,7 @@ paths:
     get:
       operationId: resolver.led.get_pixels
       tags:
-      - LED Matrix
+        - LED Matrix
       summary: Get the colour of all pixels
       responses:
         200:
@@ -116,7 +116,7 @@ paths:
     post:
       operationId: resolver.led.update_pixels
       tags:
-      - LED Matrix
+        - LED Matrix
       summary: Update the colour of all pixels
       requestBody:
         content:
@@ -124,14 +124,14 @@ paths:
             schema:
               $ref: '#/components/schemas/pixels'
             example: [
-              [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
-              [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
-              [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
-              [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
-              [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
-              [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
-              [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
-              [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
+            [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
+            [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
+            [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
+            [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
+            [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
+            [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
+            [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
+            [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255], [0,255,0], [0,0,255],
             ]
       responses:
         200:
@@ -141,7 +141,7 @@ paths:
     post:
       operationId: resolver.led.clear
       tags:
-      - LED Matrix
+        - LED Matrix
       summary: Clear the pixels
       requestBody:
         content:
@@ -160,7 +160,7 @@ paths:
     post:
       operationId: resolver.led.flip
       tags:
-      - LED Matrix
+        - LED Matrix
       summary: Flip the pixels horizontally or vertically
       requestBody:
         content:
@@ -176,7 +176,7 @@ paths:
     post:
       operationId: resolver.led.show_letter
       tags:
-      - LED Matrix
+        - LED Matrix
       summary: Display one letter
       requestBody:
         content:
@@ -196,7 +196,7 @@ paths:
     post:
       operationId: resolver.led.show_message
       tags:
-      - LED Matrix
+        - LED Matrix
       summary: Scroll a text message
       requestBody:
         content:
@@ -216,7 +216,7 @@ paths:
     get:
       operationId: resolver.joystick.get_events
       tags:
-       - Joystick
+        - Joystick
       summary: Get joystick events since last call (max 1000)
       responses:
         200:

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 class LedMatrix(object):
   def __init__(self, sense):
     self.__sense = sense
@@ -40,7 +41,7 @@ class LedMatrix(object):
     self.__sense.show_letter(
       body["letter"],
       body.get("text_colour", [255, 255, 255]),
-      body.get("back_colour", [0,0,0])
+      body.get("back_colour", [0, 0, 0])
     )
 
   def show_message(self, body):
@@ -48,6 +49,5 @@ class LedMatrix(object):
       body["message"],
       body.get("scroll_speed", 0.1),
       body.get("text_colour", [255, 255, 255]),
-      body.get("back_colour", [0,0,0])
+      body.get("back_colour", [0, 0, 0])
     )
-

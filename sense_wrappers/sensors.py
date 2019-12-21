@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 class Sensors(object):
   def __init__(self, sense):
     self.__sense = sense
@@ -43,9 +44,10 @@ class Sensors(object):
   def get(self, name):
     return getattr(self, name)()
 
-  def __u_v_dict(self, u, v):
+  @staticmethod
+  def __u_v_dict(u, v):
     if isinstance(v, int):
       v = float(v)
     elif isinstance(v, dict):
-      v = { key:float(value) for key,value in v.items() }
+      v = {key: float(value) for key, value in v.items()}
     return {"unit": u, "value": v}

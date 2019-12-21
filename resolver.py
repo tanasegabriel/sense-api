@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys
+
 from sense_wrappers import sensors, led_matrix, joystick
 
 if "emulation" in sys.argv:

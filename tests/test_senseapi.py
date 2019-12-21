@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 import atexit
-import pytest
 import subprocess
+
+import pytest
 
 sense_emulator = subprocess.Popen(["sense_play", "tests/sense_fixture.hat"])
 atexit.register(sense_emulator.terminate)
